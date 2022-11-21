@@ -31,7 +31,7 @@ export const createRecipe = async (req: Request, res: Response) => {
 
 export const updateRecipe = async (req: Request, res: Response) => {
     try {
-        const editRecipe = await Recipe.updateOne({_id : req.params.id}, {
+        const editRecipe = await Recipe.findByIdAndUpdate({_id : req.params.id}, {
             $set : {
                 name : req.body.name,
                 description : req.body.description
@@ -45,7 +45,7 @@ export const updateRecipe = async (req: Request, res: Response) => {
 
 export const deleteRecipe = async (req: Request, res: Response) => {
     try {
-        const deleteRecipe = await Recipe.remove({_id : req.params.id});
+        const deleteRecipe = await Recipe.findOneAndDelete({_id : req.params.id});
         res.status(204).json(deleteRecipe);
     } catch (err) {
         res.status(404).json({err: err});
