@@ -30,19 +30,24 @@ export const createRecipe = async (req: Request, res: Response) => {
 }
 
 export const updateRecipe = async (req: Request, res: Response) => {
-    try{
-        const recipe = await Recipe.updateOne({_id: req.params.id}, {$se: {name: req.body.name, description: req.body.description}});
-        res.status(204).json(recipe);
-    } catch (err: any) {
-        throw new Error(err);
+    try {
+        const editRecipe = await Recipe.updateOne({_id : req.params.id}, {
+            $set : {
+                name : req.body.name,
+                description : req.body.description
+            }
+        });
+        res.status(200).json(editRecipe);
+    } catch (err) {
+        res.status(404).json({ err: err });
     }
 }
 
 export const deleteRecipe = async (req: Request, res: Response) => {
     try {
-        const recipe = await Recipe.remove({_id: req.params.id});
-        res.status(204).json(recipe);
-    } catch(err: any) {
-        throw new Error(err);
+        const deleteRecipe = await Recipe.remove({_id : req.params.id});
+        res.status(204).json(deleteRecipe);
+    } catch (err) {
+        res.status(404).json({err: err});
     }
 }
