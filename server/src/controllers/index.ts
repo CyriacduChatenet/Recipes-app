@@ -22,6 +22,7 @@ export const getRecipeById = async (req: Request, res: Response) => {
 export const createRecipe = async (req: Request, res: Response) => {
     try {
         const recipe = await Recipe.create(req.body);
+        recipe.save();
         res.status(201).json(recipe);
     } catch (err: any) {
         throw new Error(err);
@@ -30,7 +31,7 @@ export const createRecipe = async (req: Request, res: Response) => {
 
 export const updateRecipe = async (req: Request, res: Response) => {
     try{
-        const recipe = await Recipe.findByIdAndUpdate(req.params.id, req.body);
+        const recipe = await Recipe.updateOne({_id: req.params.id}, {$se: {name: req.body.name, description: req.body.description}});
         res.status(204).json(recipe);
     } catch (err: any) {
         throw new Error(err);
@@ -39,7 +40,7 @@ export const updateRecipe = async (req: Request, res: Response) => {
 
 export const deleteRecipe = async (req: Request, res: Response) => {
     try {
-        const recipe = await Recipe.findByIdAndRemove(req.params.id);
+        const recipe = await Recipe.remove({_id: req.params.id});
         res.status(204).json(recipe);
     } catch(err: any) {
         throw new Error(err);
