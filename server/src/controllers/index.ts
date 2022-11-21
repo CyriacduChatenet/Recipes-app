@@ -36,7 +36,7 @@ export const updateRecipe = async (req: Request, res: Response) => {
                 name : req.body.name,
                 description : req.body.description
             }
-        });
+        }, {new: true});
         res.status(200).json(editRecipe);
     } catch (err) {
         res.status(404).json({ err: err });
