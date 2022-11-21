@@ -9,13 +9,9 @@ const recipeSchema = new Schema<IRecipe>({
     description: {
         type: String,
         required: true,
-    },
-    ingredients: {
-        type: [String],
-        required: true,
     }
 });
 
-const Recipe = model<IRecipe>('reciipes', recipeSchema);
+const Recipe = model<IRecipe>('recipes', recipeSchema);
 
 export default Recipe;

@@ -1,7 +1,10 @@
 import mongoose, { ConnectOptions } from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export const DBconnection = () => {
-    mongoose.connect('mongodb://mongoroot:mongoroot@localhost:27017/', {
+    mongoose.connect(`mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@localhost:${process.env.MONGODB_PORT}/`, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
 
