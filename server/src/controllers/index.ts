@@ -6,7 +6,7 @@ export const getAllRecipes = async (_req: Request, res: Response) => {
         const recipes = await Recipe.find();
         res.status(200).json(recipes);
     } catch (err: any) {
-        throw new Error(err);
+        res.status(404).json(err);
     }
 };
 
@@ -15,7 +15,7 @@ export const getRecipeById = async (req: Request, res: Response) => {
         const recipe = await Recipe.findById(req.params.id);
         res.status(200).json(recipe);
     } catch (err: any) {
-        throw new Error(err);
+        res.status(404).json(err);
     }
 };
 
@@ -25,7 +25,7 @@ export const createRecipe = async (req: Request, res: Response) => {
         recipe.save();
         res.status(201).json(recipe);
     } catch (err: any) {
-        throw new Error(err);
+        res.status(404).json(err);
     }
 }
 
