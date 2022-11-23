@@ -1,5 +1,16 @@
-# CLEAN DOCKER
+## Start project manually :
 
+```bash
+docker-compose up -d                            
+```
+
+## Start project automatically with Makefile :
+
+```bash
+make init                          
+```
+
+## CLEAN DOCKER
 ```bash
 // stop all containers
 docker stop $(docker ps -a -q)
